@@ -10,40 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import type { Process } from '@/entities';
 import { ProcessBlock } from '@/widgets';
+import { processes } from '@/shared';
 
 const CANVAS_W = 1200;
 const CANVAS_H = 800;
-
-// процессы можно захардкодить согласно ТЗ
-const processes: Process[] = [
-  {
-    id: 'proc-1',
-    label: 'Оптимизация процессов, улучшение их показателей',
-    x: 80,
-    y: 100,
-    width: 200,
-    height: 120,
-  },
-  {
-    id: 'proc-2',
-    label:
-      'Оптимизация процессов, улучшение их показателей и повышение эффективности работы',
-    x: 400,
-    y: 250,
-    width: 220,
-    height: 130,
-  },
-  {
-    id: 'proc-3',
-    label: 'Используйте инструмент для создания блок',
-    x: 780,
-    y: 120,
-    width: 200,
-    height: 120,
-  },
-];
 </script>
 
 <style module lang="scss">
