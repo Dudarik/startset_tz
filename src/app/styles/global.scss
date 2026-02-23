@@ -1,0 +1,39 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-text: #1e293b;
+  --color-bg: #f0f0f0;
+  --color-canvas: #ffffff;
+  --color-canvas-grid: #e0e0e0;
+  --color-process: #ffffff;
+  --color-process-bg: #ffffff;
+  --color-process-border: #228afb;
+  --color-process-text: #1d4ed8;
+  --color-sticker: #fffad4;
+  --color-sticker-border: #d5d5d5;
+  --color-sticker-shadow: rgba(0, 0, 0, 0.15);
+  --color-sticker-active-shadow: rgba(0, 0, 0, 0.3);
+
+  --box-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+}
+
+#app {
+  width: 100%;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+}
