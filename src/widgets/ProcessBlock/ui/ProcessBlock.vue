@@ -4,8 +4,8 @@
     :style="{
       left: `${x}px`,
       top: `${y}px`,
-      width: `${width}`,
-      height: `${height}`,
+      width: `${width}px`,
+      height: `${height}px`,
     }"
   >
     <div :class="$style.label">{{ process.label }}</div>
@@ -38,9 +38,8 @@ const { x, y, width, height } = props.process;
   user-select: none;
 
   .label {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 500;
-    max-width: 10rem;
     text-align: center;
     color: var(--color-process-text);
     padding: 0.5rem;
