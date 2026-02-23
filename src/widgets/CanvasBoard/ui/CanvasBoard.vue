@@ -49,18 +49,27 @@ const processes: Process[] = [
 <style module lang="scss">
 .canvasWrapper {
   overflow: auto;
-  flex: 1;
+
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 20px;
+
+  padding: 1rem;
 
   .canvas {
     position: relative;
-    background: #ffffff;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-    border-radius: 8px;
-    flex-shrink: 0;
+
+    background-color: var(--color-canvas);
+    background-image:
+      linear-gradient(to right, var(--color-canvas-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-canvas-grid) 1px, transparent 1px);
+
+    background-size: 1.5rem 1.5rem;
+
+    box-shadow: 0 0.25rem 1.5rem rgba(0, 0, 0, 0.12);
+
+    border-radius: var(--border-radius);
+
     overflow: hidden;
   }
 }
