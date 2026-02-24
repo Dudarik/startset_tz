@@ -1,17 +1,9 @@
 <script setup lang="ts">
 import { ref, nextTick, onMounted, useTemplateRef } from 'vue';
 import type { Sticker } from '@/entities/sticker';
+import type { Handle } from '@/shared';
 
-const handles = [
-  { name: 'nw' },
-  { name: 'n' },
-  { name: 'ne' },
-  { name: 'w' },
-  { name: 'e' },
-  { name: 'sw' },
-  { name: 's' },
-  { name: 'se' },
-];
+const handles: Handle[] = ['nw', 'n', 'ne', 'w', 'e', 'sw', 's', 'se'];
 
 const props = defineProps<{
   sticker: Sticker;
@@ -20,7 +12,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   'sticker:dragStart': [id: string, event: PointerEvent];
-  'sticker:resizeStart': [id: string, handle: string, event: PointerEvent];
+  'sticker:resizeStart': [id: string, handle: Handle, event: PointerEvent];
   'sticker:updateText': [id: string, text: string];
   'sticker:delete': [id: string];
 }>();
@@ -85,11 +77,11 @@ onMounted(async () => {
       @pointerdown.stop
     />
 
-    <template v-for="handle in handles" :key="handle.name">
+    <template v-for="handle in handles" :key="handle">
       <div
-        :class="[$style.handle, $style[`handle-${handle.name}`]]"
+        :class="[$style.handle, $style[`handle-${handle}`]]"
         @pointerdown.stop="
-          emit('sticker:resizeStart', sticker.id, handle.name, $event)
+          emit('sticker:resizeStart', sticker.id, handle, $event)
         "
       />
     </template>

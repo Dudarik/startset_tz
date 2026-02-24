@@ -2,7 +2,7 @@
 import { useTemplateRef } from 'vue';
 import { processes, useConfigApp } from '@/shared';
 import { useStickerStore } from '@/entities';
-import { useStickerDrag } from '@/features';
+import { useStickerDrag, useStickerResize } from '@/features';
 import { ProcessBlock, StickerBlock } from '@/widgets';
 
 const { CANVAS_H, CANVAS_W } = useConfigApp();
@@ -12,10 +12,7 @@ const canvasRef = useTemplateRef<HTMLDivElement>('canvasRef');
 const stickersStore = useStickerStore();
 const { updateStickerText, removeSticker } = stickersStore;
 const { draggingId, startDrag } = useStickerDrag(processes, canvasRef);
-
-const onStickerResize = () => {
-  console.log('onStickerResize');
-};
+const { startResize } = useStickerResize(processes, canvasRef);
 </script>
 
 <template>
@@ -33,7 +30,7 @@ const onStickerResize = () => {
         :isDragging="draggingId === sticker.id"
         @sticker:updateText="updateStickerText"
         @sticker:delete="removeSticker"
-        @sticker:resizeStart="onStickerResize"
+        @sticker:resizeStart="startResize"
         @sticker:dragStart="startDrag"
       />
     </div>
