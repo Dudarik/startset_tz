@@ -1,9 +1,16 @@
+<script setup lang="ts">
+import { useStickerCreate } from '@/features';
+
+const { createSticker } = useStickerCreate();
+</script>
 <template>
   <header :class="$style.header">
     <h1 :class="$style.title">Startset TZ</h1>
 
     <div :class="$style.actions">
-      <button :class="$style.btn">+ Добавить стикер</button>
+      <button :class="$style.btn" @click="() => createSticker()">
+        + Добавить стикер
+      </button>
     </div>
   </header>
 </template>
