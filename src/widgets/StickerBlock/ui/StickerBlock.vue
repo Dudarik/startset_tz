@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, nextTick, onMounted, useTemplateRef } from 'vue';
+import { ref, nextTick, onMounted, useTemplateRef, computed } from 'vue';
 import type { Sticker } from '@/entities/sticker';
 import type { Handle } from '@/shared';
+import { useAutoFontSize } from '@/features';
 
 const handles: Handle[] = ['nw', 'n', 'ne', 'w', 'e', 'sw', 's', 'se'];
 
@@ -21,6 +22,16 @@ const isEditing = ref(false);
 const stickerTextEditorRef = useTemplateRef<HTMLTextAreaElement>(
   'stickerTextEditorRef',
 );
+const textDisplayRef = useTemplateRef<HTMLDivElement>('textDisplayRef');
+
+const computedW = computed(() => props.sticker.width);
+const computedH = computed(() => props.sticker.height);
+
+const { recalculateFontSize } = useAutoFontSize(
+  textDisplayRef,
+  computedW,
+  computedH,
+);
 
 const startEditing = async () => {
   isEditing.value = true;
@@ -35,6 +46,8 @@ const startEditing = async () => {
 
 const stopEditing = async () => {
   isEditing.value = false;
+  await nextTick();
+  recalculateFontSize();
 };
 
 const onInput = (e: Event) => {
@@ -42,7 +55,7 @@ const onInput = (e: Event) => {
   emit('sticker:updateText', props.sticker.id, value);
 };
 
-onMounted(async () => {
+onMounted(() => {
   if (!props.sticker.text) {
     startEditing();
   }
@@ -62,7 +75,7 @@ onMounted(async () => {
     @dblclick.stop="startEditing"
     @pointerdown.stop="emit('sticker:dragStart', sticker.id, $event)"
   >
-    <div v-if="!isEditing" :class="$style.textDisplay">
+    <div v-if="!isEditing" :class="$style.textDisplay" ref="textDisplayRef">
       {{ sticker.text || 'no text' }}
     </div>
 
