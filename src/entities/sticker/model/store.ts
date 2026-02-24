@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import type { Sticker } from './types';
 
 let zIndexCounter = 10;
@@ -42,8 +42,13 @@ export const useStickerStore = defineStore('sticker', () => {
     stickers.value = stickers.value.filter((s) => s.id !== id);
   }
 
+  const getStickerById = computed(
+    () => (stickerId: string) => stickers.value.find((s) => s.id === stickerId),
+  );
+
   return {
     stickers,
+    getStickerById,
     addSticker,
     updateSticker,
     bringToFront,
