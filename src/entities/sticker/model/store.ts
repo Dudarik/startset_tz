@@ -30,7 +30,6 @@ export const useStickerStore = defineStore('sticker', () => {
   }
 
   function updateStickerText(id: string, text: string) {
-    console.log('updateStickerText', id, text);
     updateSticker(id, { text });
   }
 

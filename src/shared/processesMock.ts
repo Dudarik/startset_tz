@@ -27,4 +27,12 @@ export const processes: Process[] = [
     width: 200,
     height: 120,
   },
+  {
+    id: 'proc-4',
+    label: 'Используйте инструмент для создания блок',
+    x: 1000,
+    y: 500,
+    width: 200,
+    height: 120,
+  },
 ];
