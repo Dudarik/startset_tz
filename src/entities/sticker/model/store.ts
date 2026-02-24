@@ -29,6 +29,11 @@ export const useStickerStore = defineStore('sticker', () => {
     stickers.value[sid] = { ...stickers.value[sid], ...patch } as Sticker;
   }
 
+  function updateStickerText(id: string, text: string) {
+    console.log('updateStickerText', id, text);
+    updateSticker(id, { text });
+  }
+
   function bringToFront(id: string) {
     updateSticker(id, { zIndex: ++zIndexCounter });
   }
@@ -43,5 +48,6 @@ export const useStickerStore = defineStore('sticker', () => {
     updateSticker,
     bringToFront,
     removeSticker,
+    updateStickerText,
   };
 });
