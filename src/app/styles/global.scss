@@ -17,11 +17,13 @@
   --color-process-text: #1d4ed8;
   --color-sticker: #fffad4;
   --color-sticker-border: #d5d5d5;
+  --color-sticker-bg: var(--color-process-bg);
   --color-sticker-shadow: rgba(0, 0, 0, 0.15);
   --color-sticker-active-shadow: rgba(0, 0, 0, 0.3);
 
   --border-radius: 0.5rem;
   --box-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --box-shadow-light: 2px 4px 12px rgba(0, 0, 0, 0.15);
 
   --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
