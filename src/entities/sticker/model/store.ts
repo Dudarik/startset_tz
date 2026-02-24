@@ -37,5 +37,11 @@ export const useStickerStore = defineStore('sticker', () => {
     stickers.value = stickers.value.filter((s) => s.id !== id);
   }
 
-  return { stickers, addSticker, updateSticker, bringToFront, removeSticker };
+  return {
+    stickers,
+    addSticker,
+    updateSticker,
+    bringToFront,
+    removeSticker,
+  };
 });
