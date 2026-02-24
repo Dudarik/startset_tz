@@ -18,8 +18,6 @@ const props = defineProps<{
   isDragging: boolean;
 }>();
 
-const { id, x, y, width, height, zIndex } = props.sticker;
-
 const emit = defineEmits<{
   'sticker:dragStart': [id: string, event: PointerEvent];
   'sticker:resizeStart': [id: string, handle: string, event: PointerEvent];
@@ -49,7 +47,7 @@ const stopEditing = async () => {
 
 const onInput = (e: Event) => {
   const { value } = e.target as HTMLTextAreaElement;
-  emit('sticker:updateText', id, value);
+  emit('sticker:updateText', props.sticker.id, value);
 };
 
 onMounted(async () => {
@@ -63,13 +61,14 @@ onMounted(async () => {
   <div
     :class="[$style.sticker, isDragging && $style.dragging]"
     :style="{
-      left: `${x}px`,
-      top: `${y}px`,
-      width: `${width}px`,
-      height: `${height}px`,
-      zIndex,
+      left: `${sticker.x}px`,
+      top: `${sticker.y}px`,
+      width: `${sticker.width}px`,
+      height: `${sticker.height}px`,
+      zIndex: sticker.zIndex,
     }"
     @dblclick.stop="startEditing"
+    @pointerdown.stop="emit('sticker:dragStart', sticker.id, $event)"
   >
     <div v-if="!isEditing" :class="$style.textDisplay">
       {{ sticker.text || 'no text' }}
@@ -132,7 +131,7 @@ $transition-duration: 150ms;
 
   &.dragging {
     cursor: grabbing;
-    box-shadow: 6px 10px 24px rgba(0, 0, 0, 1);
+    box-shadow: 6px 10px 24px rgba(0, 0, 0, 0.35);
   }
 
   .textDisplay {

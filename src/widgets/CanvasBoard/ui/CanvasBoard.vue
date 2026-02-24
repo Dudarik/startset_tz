@@ -1,8 +1,29 @@
+<script setup lang="ts">
+import { useTemplateRef } from 'vue';
+import { processes, useConfigApp } from '@/shared';
+import { useStickerStore } from '@/entities';
+import { useStickerDrag } from '@/features';
+import { ProcessBlock, StickerBlock } from '@/widgets';
+
+const { CANVAS_H, CANVAS_W } = useConfigApp();
+
+const canvasRef = useTemplateRef<HTMLDivElement>('canvasRef');
+
+const stickersStore = useStickerStore();
+const { updateStickerText, removeSticker } = stickersStore;
+const { draggingId, startDrag } = useStickerDrag(processes, canvasRef);
+
+const onStickerResize = () => {
+  console.log('onStickerResize');
+};
+</script>
+
 <template>
   <div :class="$style.canvasWrapper">
     <div
       :class="$style.canvas"
-      :style="{ width: CANVAS_W + 'px', height: CANVAS_H + 'px' }"
+      :style="{ width: `${CANVAS_W}px`, height: `${CANVAS_H}px` }"
+      ref="canvasRef"
     >
       <ProcessBlock v-for="proc in processes" :key="proc.id" :process="proc" />
       <StickerBlock
@@ -13,31 +34,11 @@
         @sticker:updateText="updateStickerText"
         @sticker:delete="removeSticker"
         @sticker:resizeStart="onStickerResize"
-        @sticker:dragStart="onDragStart"
+        @sticker:dragStart="startDrag"
       />
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ProcessBlock, StickerBlock } from '@/widgets';
-import { processes } from '@/shared';
-import { useStickerStore } from '@/entities';
-
-const CANVAS_W = 1200;
-const CANVAS_H = 800;
-
-const stickersStore = useStickerStore();
-const { updateStickerText, removeSticker } = stickersStore;
-
-const draggingId = 't';
-const onStickerResize = () => {
-  console.log('onStickerResize');
-};
-const onDragStart = () => {
-  console.log('onDragStart');
-};
-</script>
 
 <style module lang="scss">
 .canvasWrapper {
