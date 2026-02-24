@@ -1,7 +1,7 @@
 import { useStickerStore } from '@/entities';
 
 const DEFAULT_X = 580;
-const DEFAULT_Y = 380;
+const DEFAULT_Y = 400;
 
 export function useStickerCreate() {
   const stickerStore = useStickerStore();
