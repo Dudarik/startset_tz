@@ -1,8 +1,14 @@
 # Стикеры на холсте (Vue 3 + Pinia + TypeScript + Vite)
 
-#### Деплой
+### Деплой
 
 [startset_tz](https://dudarik.github.io/startset_tz/ 'gh-pages')
+
+## Быстрый старт
+
+```bash
+git clone https://github.com/Dudarik/startset_tz.git
+```
 
 #### Установка зависимостей
 
